@@ -44,11 +44,11 @@ local Library = {
 			WeakText = Color3.fromHSV(0, 0, 172/255)
 		},
 		Aqua = {
-			Main = Color3.fromRGB(19, 21, 21),
-			Secondary = Color3.fromRGB(65, 63, 63),
-			Tertiary = Color3.fromRGB(51, 153, 137),
+            Main = Color3.fromRGB(30, 30, 35),
+			Secondary = Color3.fromRGB(60, 60, 60),
+			Tertiary = Color3.fromRGB(70, 130, 180),
 
-			StrongText = Color3.fromHSV(0, 0, 1),        
+			StrongText = Color3.fromHSV(0, 0, 1),		
 			WeakText = Color3.fromHSV(0, 0, 172/255)
 		},
 		Vaporwave = {},
@@ -73,9 +73,6 @@ local Library = {
 	DragSpeed = 0.06,
 	LockDragging = false,
 	ToggleKey = Enum.KeyCode.Home,
-	UrlLabel = nil,
-	Url = nil
-
 }
 Library.__index = Library
 
@@ -415,7 +412,6 @@ function Library:create(options)
 		Name = "Mercury",
 		Size = UDim2.fromOffset(600, 400),
 		Theme = self.Themes[settings.Theme],
-		Link = "https://github.com/deeeity/mercury-lib"
 	}, options)
 
 	if getgenv and getgenv().MercuryUI then
@@ -423,11 +419,6 @@ function Library:create(options)
 		getgenv().MercuryUI = nil
 	end
 
-
-
-	if options.Link:sub(-1, -1) == "/" then
-		options.Link = options.Link:sub(1, -2)
-	end
 
 	if options.Theme.Light then
 		self.darken, self.lighten = self.lighten, self.darken
@@ -576,35 +567,7 @@ function Library:create(options)
 		closeUI()
 	end)
 
-	local urlBar = core:object("Frame", {
-		Size = UDim2.new(1, -10, 0, 25),
-		Position = UDim2.new(0, 5,0, 35),
-		Theme = {BackgroundColor3 = "Secondary"}
-	}):round(5)
 
-	local searchIcon = urlBar:object("ImageLabel", {
-		AnchorPoint = Vector2.new(0, .5),
-		Position = UDim2.new(0, 5,0.5, 0);
-		Theme = {ImageColor3 = "Tertiary"},
-		Size = UDim2.fromOffset(16, 16),
-		Image = "http://www.roblox.com/asset/?id=8497489946",
-		BackgroundTransparency = 1
-	})
-
-	local link = urlBar:object("TextLabel", {
-		AnchorPoint = Vector2.new(0, 0.5),
-		Position = UDim2.new(0, 26, 0.5, 0),
-		BackgroundTransparency = 1,
-		Size = UDim2.new(1, -30, .6, 0),
-		Text = options.Link .. "/home",
-		Theme = {TextColor3 = "WeakText"},
-		TextSize = 14,
-		TextScaled = false,
-		TextXAlignment = Enum.TextXAlignment.Left
-	})
-
-	Library.UrlLabel = link
-	Library.Url = options.Link
 
 	local shadowHolder = core:object("Frame", {
 		BackgroundTransparency = 1,
@@ -629,7 +592,7 @@ function Library:create(options)
 		Theme = {BackgroundColor3 = {"Secondary", -10}},
 		AnchorPoint = Vector2.new(0.5, 1),
 		Position = UDim2.new(0.5, 0, 1, -20),
-		Size = UDim2.new(1, -10, 1, -86)
+		Size = UDim2.new(1, -10, 1, -55)
 	}):round(7) -- Sept
 
 	local status = core:object("TextLabel", {
@@ -721,7 +684,6 @@ function Library:create(options)
 			selectedTab = homeButton
 			homePage.Visible = true
 			homeButton.BackgroundTransparency = 0
-			Library.UrlLabel.Text = Library.Url .. "/home"
 		end)
 	end
 
@@ -865,7 +827,7 @@ function Library:create(options)
 	settingsTab:keybind{
 		Name = "Toggle Key",
 		Description = "Key to show/hide the UI.",
-		Keybind = Enum.KeyCode.Delete,
+		Keybind = Enum.KeyCode.LeftControl,
 		Callback = function()
 			self.Toggled = not self.Toggled
 			Library:show(self.Toggled)
@@ -884,10 +846,10 @@ function Library:create(options)
 	settingsTab:slider{
 		Name = "UI Drag Speed",
 		Description = "How smooth the dragging looks.",
-		Max = 20,
-		Default = 14,
+		Max = 50,
+		Default = 25,
 		Callback = function(value)
-			Library.DragSpeed = (20 - value)/100
+			Library.DragSpeed = (50 - value)/100
 		end,
 	}
 
@@ -899,9 +861,8 @@ function Library:create(options)
 
 	rawset(mt, "creditsContainer", creditsTab.container)
 
-    creditsTab:credit{Name = "Woutt", Description = "System-Fludex Developer", Discord = "Woutt#4106"}
-	creditsTab:credit{Name = "Abstract", Description = "UI Library Developer", Discord = "Abstract#8007", V3rmillion = "AbstractPoo"}
-	creditsTab:credit{Name = "Deity", Description = "UI Library Developer", Discord = "Deity#0228", V3rmillion = "0xDEITY"}
+    creditsTab:credit{Name = "Woutt#4106", Description = "System-Fludex Developer", Discord = "tg9uymesSZ"}
+	creditsTab:credit{Name = "Abstract#8007 | Deity#0228", Description = "UI Library Developer", Discord = "wnq8ENkF4t", V3rmillion = "AbstractPoo | 0xDEITY"}
 
 	return mt
 end
@@ -1139,7 +1100,6 @@ function Library:tab(options)
 			selectedTab = tabButton
 			tab.Visible = true
 			tabButton.BackgroundTransparency = 0
-			Library.UrlLabel.Text = Library.Url .. "/" .. options.Name:lower()
 		end)
 
 		quickAccessButton.MouseEnter:connect(function()
@@ -1166,10 +1126,7 @@ function Library:tab(options)
 				selectedTab = tabButton
 				tab.Visible = true
 				tabButton.BackgroundTransparency = 0
-				Library.UrlLabel.Text = Library.Url .. "/" .. options.Name:lower()
-
             else
-                print("eeeeeeeeeeeeeeeeeeeeeeeeee")
                 for _, tabInfo in next, self.Tabs do
                     local page = tabInfo[1]
                     local button = tabInfo[2]
@@ -1179,9 +1136,7 @@ function Library:tab(options)
                 selectedTab = tabButton
                 tab.Visible = true
                 tabButton.BackgroundTransparency = 0
-                Library.UrlLabel.Text = Library.Url .. "/" .. options.Name:lower()
 			end
-
 		end)
 	end
 
@@ -1243,20 +1198,17 @@ function Library:tab(options)
 			self.homePage.Visible = true
 			self.homeButton:tween{BackgroundTransparency = 0.15}
 			selectedTab = self.homeButton
-			Library.UrlLabel.Text = Library.Url .. "/home"	
 		elseif tabButton == lastTab[2] then
 			lastTab = visible[#visible-1]
 			tab.Visible = false
 			lastTab[2]:tween{BackgroundTransparency = 0.15}
 			lastTab[1].Visible = true
 			selectedTab = lastTab[2]
-			Library.UrlLabel.Text = Library.Url .. "/" .. lastTab[3]:lower()
 		else
 			tab.Visible = false
 			lastTab[2]:tween{BackgroundTransparency = 0.15}
 			lastTab[1].Visible = true
 			selectedTab = lastTab[2]
-			Library.UrlLabel.Text = Library.Url .. "/" .. lastTab[3]:lower()
 		end
 	end)
 
@@ -2770,7 +2722,7 @@ function Library:credit(options)
 				Size = UDim2.fromOffset(24, 24),
 				Position = UDim2.new(1, -8, 1, -8),
 				BackgroundColor3 = Color3.fromRGB(88, 101, 242)
-			}):round(5):tooltip("copy discord")
+			}):round(5):tooltip("discord")
 			local discord = discordContainer:object("Frame", {
 				Size = UDim2.new(1, -6, 1, -6),
 				Centered = true,
@@ -2818,7 +2770,25 @@ function Library:credit(options)
 			})
 
 			discordContainer.MouseButton1Click:connect(function()
-				setclipboard(options.Discord)
+                local inv_protect = pcall(function()
+                    setclipboard"https://discord.gg/"..tostring(options.Discord))
+                    game.StarterGui:SetCore("SendNotification",{Title = "System-Fludex", Text = "Copied invite to your clipboard", Duration = 3})
+                    if syn.request or http_request or request or http.request then
+                        local req = syn.request or http_request or request or http.request or nil
+                        if req ~= nil then
+                            for port=6463, 6472, 1 do
+                                local inv = "http://127.0.0.1:"..tostring(port).."/rpc?v=1"
+                                local http = game:GetService("HttpService")
+                                local t = {cmd = "INVITE_BROWSER", args = {["code"] = tostring(options.Discord)}, nonce = string.lower(http:GenerateGUID(false))}
+                                local post = http:JSONEncode(t)
+                                req({Url = inv, Method = "POST", Body = post, Headers = {["Content-Type"] = "application/json", ["Origin"] = "https://discord.com"}})
+                            end
+                        end
+                    end
+                end)
+                if inv_protect == false then
+                    game.StarterGui:SetCore("SendNotification",{Title = "Couldn't copy invite", Text = "Discord invite:\nhttps://discord.gg/"..tostring(options.Discord), Duration = 25})
+                end
 			end)
 		end
 
