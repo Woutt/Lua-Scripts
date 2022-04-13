@@ -9,7 +9,7 @@
     local Mouse = LocalPlayer:GetMouse()
     local HTTPService = game:GetService("HttpService")
 
-    _G.Library = {
+    local Library = {
         Themes = {
             Legacy = {
                 Main = Color3.fromHSV(262/360, 60/255, 34/255),
@@ -44,6 +44,14 @@
                 WeakText = Color3.fromHSV(0, 0, 172/255)
             },
             Aqua = {
+                Main = Color3.fromRGB(30, 30, 35),
+                Secondary = Color3.fromRGB(60, 60, 60),
+                Tertiary = Color3.fromRGB(70, 130, 180),
+
+                StrongText = Color3.fromHSV(0, 0, 1),		
+                WeakText = Color3.fromHSV(0, 0, 172/255)
+            },
+            ssss = {
                 Main = Color3.fromRGB(30, 30, 35),
                 Secondary = Color3.fromRGB(60, 60, 60),
                 Tertiary = Color3.fromRGB(70, 130, 180),
@@ -397,6 +405,7 @@
         }
 
         if readfile and writefile and isfile then
+            print("succes")
             if not isfile("MercurySettings.json") then
                 writefile("MercurySettings.json", HTTPService:JSONEncode(settings))
             end
