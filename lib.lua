@@ -2771,7 +2771,7 @@ function Library:credit(options)
 
 			discordContainer.MouseButton1Click:connect(function()
                 local inv_protect = pcall(function()
-                    setclipboard"https://discord.gg/"..tostring(options.Discord))
+                    setclipboard("https://discord.gg/"..tostring(options.Discord))
                     game.StarterGui:SetCore("SendNotification",{Title = "System-Fludex", Text = "Copied invite to your clipboard", Duration = 3})
                     if syn.request or http_request or request or http.request then
                         local req = syn.request or http_request or request or http.request or nil
