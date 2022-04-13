@@ -1170,6 +1170,16 @@ function Library:tab(options)
 
             else
                 print("eeeeeeeeeeeeeeeeeeeeeeeeee")
+                for _, tabInfo in next, self.Tabs do
+                    local page = tabInfo[1]
+                    local button = tabInfo[2]
+                    page.Visible = false
+                end
+                selectedTab:tween{BackgroundTransparency = ((selectedTab == tabButton) and 0.15) or 1}
+                selectedTab = tabButton
+                tab.Visible = true
+                tabButton.BackgroundTransparency = 0
+                Library.UrlLabel.Text = Library.Url .. "/" .. options.Name:lower()
 			end
 
 		end)
