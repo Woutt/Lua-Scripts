@@ -56,7 +56,7 @@
             VisualStudio = {}
         },
         ColorPickerStyles = {
-            Legacy = 1,--0
+            Legacy = 0,
             Modern = 1
         },
         Toggled = true,
