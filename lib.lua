@@ -739,7 +739,7 @@ function Library:create(options)
     do
         local desiredInterval = 1
         local counter = 0
-        RunService.Heartbeat:Connect(function(step)
+        game:GetService("RunService").Heartbeat:Connect(function(step)
             counter += step  
             if counter >= desiredInterval then
                 counter -= desiredInterval
