@@ -382,8 +382,8 @@ function Library:set_status(txt)
     self.statusText.Text = txt
 end
 
-function Library:create(options)
-
+function Library:create()
+    local options = {Theme = "Dark"}
     local settings = {Theme = "Dark"}
     if isfile("System-Fludex/theme.lib") then
         options.Theme = game:GetService("HttpService"):JSONDecode(readfile("System-Fludex/theme.lib")).Theme
