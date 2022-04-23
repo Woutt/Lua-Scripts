@@ -385,7 +385,10 @@ end
 function Library:create(options)
 
     local settings = {Theme = "Dark"}
-    
+    if isfile("System-Fludex/theme.lib") then
+        options.Theme = game:GetService("HttpService"):JSONDecode(readfile("System-Fludex/theme.lib")).Theme
+    end
+
     settings = game:GetService("HttpService"):JSONDecode(readfile("System-Fludex/theme.lib"))
     Library.CurrentTheme = Library.Themes[settings.Theme]
     updateSettings = function(property, value)
