@@ -382,13 +382,10 @@ function Library:set_status(txt)
     self.statusText.Text = txt
 end
 
-function Library:create()
-    local options = {Theme = "Dark"}
-    local settings = {Theme = "Dark"}
-    if isfile("System-Fludex/theme.lib") then
-        options.Theme = game:GetService("HttpService"):JSONDecode(readfile("System-Fludex/theme.lib")).Theme
-    end
+function Library:create(options)
 
+    local settings = {Theme = "Dark"}
+    
     settings = game:GetService("HttpService"):JSONDecode(readfile("System-Fludex/theme.lib"))
     Library.CurrentTheme = Library.Themes[settings.Theme]
     updateSettings = function(property, value)
@@ -458,7 +455,7 @@ function Library:create()
                 local Input = core.InputBegan:connect(function(Key)
                     if Key.UserInputType == Enum.UserInputType.MouseButton1 then
                         local ObjectPosition = Vector2.new(Mouse.X - core.AbsolutePosition.X, Mouse.Y - core.AbsolutePosition.Y)
-                        while game:GetService("RunService").RenderStepped:wait() and game:GetService("UserInputService"):IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+                        while RunService.RenderStepped:wait() and game:GetService("UserInputService"):IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
 
                             if Library.LockDragging then
                                 local FrameX, FrameY = math.clamp(Mouse.X - ObjectPosition.X, 0, gui.AbsoluteSize.X - core.AbsoluteSize.X), math.clamp(Mouse.Y - ObjectPosition.Y, 0, gui.AbsoluteSize.Y - core.AbsoluteSize.Y)
