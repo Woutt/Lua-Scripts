@@ -1,5 +1,3 @@
---https://raw.githubusercontent.com/Stebulous/solaris-ui-lib/main/source.lua
-
 -- This User Interface Library is brought to you by Solaris Software.
 local Solaris = Instance.new("ScreenGui")
 Solaris.Name = "dosage's solaris gui"
